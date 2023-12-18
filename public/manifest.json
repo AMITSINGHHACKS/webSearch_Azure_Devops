@@ -1,0 +1,11 @@
+{
+  "short_name": "Web search app",
+  "name": "A simple websearch",
+  "icons": [
+    
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
