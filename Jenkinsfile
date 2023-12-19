@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Stopping Existing container unwanted') {
             steps {
-                sh 'docker stop azure'
+                sh 'docker stop azureweb'
             }
         }
 	stage('Pruning') {
@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Run Container') {
             steps {
-                sh 'docker run -it -d --name azure -p 8083:6000 azure'
+                sh 'docker run -it -d --name azureweb -p 8083:6000 azure'
             }
         } 
     }
