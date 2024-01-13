@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('checking docker images') {
+        stage('checking docker image s') {
             steps {
                 sh 'docker images -a'
             }
