@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('checking docker image s') {
+        stage('SSHing ') {
             steps {
                 sh 'ssh 139.59.91.26'
             }
