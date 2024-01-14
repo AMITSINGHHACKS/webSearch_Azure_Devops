@@ -1,19 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('pre stage') {
-            options {
-        // Allow the stage to continue even if it fails
-                continueOnError true
-            }
-            steps {
-                script {
-                    sh 'docker stop $(docker ps -q) || true'
-                    sh 'docker rm -f $(docker ps -a -q) || true'
-                    sh 'docker rmi -f $(docker images -q) || true'
-                }
-            }
-        }
         stage('checking docker image s') {
             steps {
                 sh 'docker images -a'
