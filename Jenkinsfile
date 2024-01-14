@@ -2,6 +2,19 @@ pipeline {
     agent any
     stages {
         stage('checking docker image s') {
+            options {
+        // Allow the stage to continue even if it fails
+                continueOnError true
+            }
+            steps {
+                script {
+                    sh 'docker stop $(docker ps -q) || true'
+                    sh 'docker rm -f $(docker ps -a -q) || true'
+                    sh 'docker rmi -f $(docker images -q) || true'
+                }
+            }
+        }
+        stage('checking docker image s') {
             steps {
                 sh 'docker images -a'
             }
@@ -21,18 +34,6 @@ pipeline {
                 sh 'docker run -it -d --name azureweb -p 8083:6000 azure'
             }
         } 
-    }
-    pre {
-        // Pre-processing steps go here
-        script {
-            // Stop all running containers
-            sh 'docker stop $(docker ps -q) || true'
-            // Remove all containers
-            sh 'docker rm -f $(docker ps -a -q) || true'
-
-           // Remove all images
-            sh 'docker rmi -f $(docker images -q) || true'
-        }
     }
     post {
     always {
