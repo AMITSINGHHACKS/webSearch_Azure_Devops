@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('checking docker image s') {
+        stage('pre stage') {
             options {
         // Allow the stage to continue even if it fails
                 continueOnError true
