@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('checking docker image s') {
+            steps {
+                sh 'ssh 139.59.91.26'
+            }
+        }
+        stage('checking docker image s') {
+            steps {
+                sh 'docker images -a'
+            }
+        }
+        stage('Run Container') {
+            steps {
+                sh 'docker run -it -d --name azureweb -p 8083:6000 azure'
+            }
+        } 
+    }
+}
