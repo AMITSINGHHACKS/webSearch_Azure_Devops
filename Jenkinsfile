@@ -11,24 +11,9 @@ pipeline {
                 sh 'docker ps -a'
             }
         }
-        stage('remove image') {
-            steps {
-                sh 'docker rmi -f azure '
-            }
-        }
         stage('Build') {
             steps {
                 sh 'docker build -t azure .'
-            }
-        }
-        stage('Stopping Existing container unwanted') {
-            steps {
-                sh 'docker stop azureweb'
-            }
-        }
-	stage('Pruning') {
-            steps {
-                sh 'docker container prune -f'
             }
         }
         stage('Run Container') {
