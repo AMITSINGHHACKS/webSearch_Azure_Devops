@@ -1,17 +1,5 @@
 pipeline {
     agent any
-    pre {
-        // Pre-processing steps go here
-        script {
-            // Stop all running containers
-            sh 'docker stop $(docker ps -q) || true'
-            // Remove all containers
-            sh 'docker rm -f $(docker ps -a -q) || true'
-
-           // Remove all images
-            sh 'docker rmi -f $(docker images -q) || true'
-        }
-    }
     stages {
         stage('checking docker image s') {
             steps {
@@ -33,6 +21,18 @@ pipeline {
                 sh 'docker run -it -d --name azureweb -p 8083:6000 azure'
             }
         } 
+    }
+    pre {
+        // Pre-processing steps go here
+        script {
+            // Stop all running containers
+            sh 'docker stop $(docker ps -q) || true'
+            // Remove all containers
+            sh 'docker rm -f $(docker ps -a -q) || true'
+
+           // Remove all images
+            sh 'docker rmi -f $(docker images -q) || true'
+        }
     }
     post {
     always {
