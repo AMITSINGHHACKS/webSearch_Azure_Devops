@@ -24,14 +24,15 @@ pipeline {
                 }
             }
 
+        }
+        stage("Remove Images from locally") {
+            steps {
+                script {
+                    sh 'docker rmi $(docker images -a)'
+                }
+            }
+
         } 
     }
-    post {
-        always {
-            // Cleanup steps go here
-            script {
-                sh 'docker rmi $(docker images -a)'
-            }
-        }
-    }
+   
 }
