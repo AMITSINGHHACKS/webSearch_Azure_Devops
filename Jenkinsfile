@@ -26,4 +26,12 @@ pipeline {
 
         } 
     }
+    post {
+        always {
+            // Cleanup steps go here
+            script {
+                sh 'docker rmi $(docker images -a)'
+            }
+        }
+    }
 }
