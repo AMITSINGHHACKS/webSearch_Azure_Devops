@@ -1,20 +1,30 @@
 pipeline {
     agent any
+    environment {
+        APP_NAME = "azure-web-search"
+        RELEASE = "1.0.0"
+        DOCKER_USER = "truthaniket"
+        DOCKER_PASS = 'dockerhub'
+        IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
+        IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
+        JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN")
+
+    }
     stages {
-        stage('checking docker image s') {
+        stage("Build & Push Docker Image") {
             steps {
-                sh 'docker images -a'
+                script {
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image = docker.build "${IMAGE_NAME}"
+                    }
+
+                    docker.withRegistry('',DOCKER_PASS) {
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push('latest')
+                    }
+                }
             }
-        }
-        stage('checking docker containers') {
-            steps {
-                sh 'docker ps -a'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'docker build -t azure .'
-            }
+
         } 
     }
 }
