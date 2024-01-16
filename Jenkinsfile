@@ -10,6 +10,16 @@ pipeline {
        
     }
     stages {
+        stage("Sonarqube Analysis") {
+            steps {
+                script {
+                    withSonarQubeEnv(credentialsId: 'jenkins-sonarqube-token') {
+                        sh "sonar-scanner"
+                    }
+                }
+            }
+
+        }
         stage("Build & Push Docker Image") {
             steps {
                 script {
