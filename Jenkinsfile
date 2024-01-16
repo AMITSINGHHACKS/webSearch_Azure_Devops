@@ -14,7 +14,10 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv(credentialsId: 'sq') {
-                        sh "mvn sonar:sonar"
+                        sh "sonar-scanner \
+                        -Dsonar.projectKey=npm \
+                        -Dsonar.sources=./ \
+                        -Dsonar.host.url=http://143.244.128.35:9000/ \"
                     }
                 }
             }
