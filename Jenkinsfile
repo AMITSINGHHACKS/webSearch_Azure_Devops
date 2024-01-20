@@ -38,8 +38,10 @@ pipeline {
             }
         }
         stage('Trigger ManifestUpdate') {
+            steps {  
                 echo "triggering update manifest job"
                 build job: 'Devops+Kube', parameters: [string(name: 'DOCKERTAG', value: ${IMAGE_TAG})]
+            }
         }
         
     }
