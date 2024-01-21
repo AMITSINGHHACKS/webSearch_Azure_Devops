@@ -36,7 +36,7 @@ pipeline {
         stage('Trigger ManifestUpdate') {
             steps {  
                 echo "triggering update manifest job"
-                sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://142.93.218.239:8080/job/Devops+Kube/buildWithParameters?token=gitops-token'"
+                sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://139.59.13.137:8080/job/Devops+Kube/buildWithParameters?token=gitops-token'"
             }
         }
         
