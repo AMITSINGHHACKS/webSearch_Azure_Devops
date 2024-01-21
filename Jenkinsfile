@@ -11,7 +11,8 @@ pipeline {
         DOCKER_PASS = 'dockerhub'
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
-        SCANNER_HOME=tool 'sonar-scanner' 
+        SCANNER_HOME=tool 'sonar-scanner'
+        JENKINS_API_TOKEN = credentials("JENKINS_API_TOKEN") 
     }
     stages {
         stage("Build & Push Docker Image") {
@@ -40,7 +41,7 @@ pipeline {
         stage('Trigger ManifestUpdate') {
             steps {  
                 echo "triggering update manifest job"
-                build job: 'Devops+Kube', parameters: [string(name: 'IMAGETAG', value: env.BUILD_NUMBER)]
+                sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://142.93.218.239:8080/job/Devops+Kube/buildWithParameters?token=gitops-token'"
             }
         }
         
