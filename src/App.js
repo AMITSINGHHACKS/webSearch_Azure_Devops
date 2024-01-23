@@ -96,7 +96,7 @@ const triggerVideos=async(e)=>{
    <>
   {totalres &&  <p>Total Results Found: {totalres}</p>}
    <center>
-   <h1>Sorry NoName</h1>
+   <h1>GG</h1>
    <form onSubmit={searchTrigger}>
     <input className="inputbox" type="text" value={query} onChange={e=>setQuery(e.target.value)} required placeholder="Enter your Search Query here .."></input><br></br>
     <button className="buttonbox" type="submit"><div className="searchmetext">Search</div> <div className="searchicon">
