@@ -49,13 +49,15 @@ pipeline {
                 }
             }
         }
-        stage('Trigger ManifestUpdate') {
-            steps {  
-                echo "triggering update manifest job"
-                sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://4.240.19.95:8080/job/Devops+Kube/buildWithParameters?token=gitops-token'"
-            }
-        }
         
+    }
+    post { 
+        success { 
+            echo 'Triggering the PRE_PROD Pipeline'
+            sleep 30
+            sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'IMAGE_TAG=${IMAGE_TAG}' 'http://localhost:8080/job/DevOpsstatus/buildWithParameters?token=gitops-token'"
+            
+        }
     }
    
 }
