@@ -40,7 +40,7 @@ pipeline {
         stage ('Trivy Scanning') {
             steps {
                 script {
-                    sh "trivy --exit-code 1 --output /home/amit/amit/scripts/trivy/trivyreports${date +%Y%m%d_%H%M%S}.txt image ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh "trivy --exit-code 1 --output /home/amit/amit/scripts/trivy/trivyreports\$(date +%Y%m%d_%H%M%S).txt image ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
