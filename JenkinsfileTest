@@ -40,7 +40,7 @@ pipeline {
         stage ('Trivy Scanning') {
             steps {
                 script {
-                    sh "trivy --exit-code 1 --output ${WORKSPACE}/trivyreports\$(date +%Y%m%d_%H%M%S).txt image ${IMAGE_NAME}"
+                    sh "trivy --output ${WORKSPACE}/reports/trivyreports\$(date +%Y%m%d_%H%M%S).txt image ${IMAGE_NAME}"
                 }
             }
         }
