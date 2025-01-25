@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - GITHUB_CI 
+  workflow_dispatch:
 
 jobs:
   build-and-push:
